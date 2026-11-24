@@ -22,9 +22,22 @@ One number, digits only: the honest count of open browser tabs.
 characters, valid UTF-8, world-readable (mode 0644) so the grader can
 read it.
 
+The gate checks live in one place, `validate_entry(text)`, which
+returns a reason when a candidate fails and `None` when it passes.
+The digit test is strict ASCII (`0`–`9` only): `str.isdigit()` would
+also accept superscript or non-Latin digits, which are not the plain
+digits the gate means. The same function validates the entry before
+writing and re-validates what was actually written afterwards.
+
 ```sh
 python3 main.py
 cat /output/entry.txt
+```
+
+To check the entry without writing anything:
+
+```sh
+python3 main.py --check   # or: python3 main.py --dry-run
 ```
 
 ## License
